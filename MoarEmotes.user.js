@@ -35,16 +35,25 @@
             console.error("Oops:", error);
             return [];
         });
-    // REGARDING THIS FUNCTION:
-    // I HATE THE SPLIT FUNCTION IN JAVASCRIPT. IT SUCKS. AND DID NOT WANT TO WORK.
-    // I HAVE RECENTLY FOUND THAT IT WAS A PARSING ERROR REGARDING MY FETCHING METHODS. I'M A LITTLE REMEDIAL RIGHT NOW. BE NICE.
+
     function loadEmotes(link) {
         console.log("called with:", link, typeof link);
-        const emotesContainer = document.querySelector(".dropdown-cont");
+        const dropdown = document.getElementById("emoji-dropdown");
+        if (!dropdown) {
+            console.warn("Emoji dropdown not found.");
+            return;
+        }
+
+        const emotesContainer = dropdown.querySelector(".dropdown-cont");
+        if (!emotesContainer) {
+            console.warn("Emotes container not found inside emoji dropdown.");
+            return;
+        }
+
         const image = document.createElement("img");
         let filenameWithoutExtension = "";
 
-        const match = link.match(/\/([^/]+)\.(png|gif|jpeg)$/); // Regex to capture only digits before .gif/.png/.etc
+        const match = link.match(/\/([^/]+)\.(png|gif|jpeg)$/);
 
         if (match && match[1]) {
             filenameWithoutExtension = match[1];
@@ -58,10 +67,10 @@
         image.style.marginRight = "5px";
 
         image.onclick = function() {
-            if (!window.__cfRLUnblockHandlers) return false; // idk why jax does this but its okay
+            if (!window.__cfRLUnblockHandlers) return false;
             insertEmote(`:${filenameWithoutExtension}:`);
-    };
+        };
 
-    emotesContainer.appendChild(image);
-}
+        emotesContainer.appendChild(image);
+    }
 })();
