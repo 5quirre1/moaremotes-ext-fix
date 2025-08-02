@@ -12,7 +12,7 @@
 (function() {
     'use strict';
 
-    fetch('https://gist.githubusercontent.com/JustAGoodUsername/d0cfebb32023bec097b3e471a041905b/raw/fd54e0d07b69a8f5d4f7b8f33149d26f276c4344/emotes.json')
+    fetch('https://raw.githubusercontent.com/5quirre1/moaremotes-ext-fix/refs/heads/patch-2/emotes.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Oops: ${response.status}`);
